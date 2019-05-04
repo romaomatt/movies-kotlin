@@ -10,28 +10,18 @@ import retrofit2.http.Query
 
 interface TmdbApi {
 
-    companion object {
-        const val URL = "https://api.themoviedb.org/3/"
-        const val DEFAULT_LANGUAGE = "pt-BR"
-        const val DEFAULT_REGION = "BR"
-        const val TIMEOUT = 30L
-    }
-
     @GET("genre/movie/list")
-    fun genres(
-        @Query("language") language: String
-    ): Observable<GenreResponse>
+    fun genres(): Observable<GenreResponse>
 
     @GET("movie/upcoming")
     fun upcomingMovies(
-        @Query("language") language: String,
         @Query("page") page: Long,
         @Query("region") region: String
     ): Observable<UpcomingMoviesResponse>
 
     @GET("movie/{id}")
     fun movie(
-        @Path("id") id: Long,
-        @Query("language") language: String
+        @Path("id") id: Long
     ): Observable<Movie>
+
 }
