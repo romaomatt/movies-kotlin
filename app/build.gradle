@@ -21,6 +21,9 @@ android {
             versionNameSuffix "-DEBUG"
         }
     }
+    applicationVariants.all {
+        buildConfigField("String", "API_KEY", "\"1f54bd990f1cdfb230adb312546d765d\"")
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -43,6 +46,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxjava_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     //Tests
     testImplementation "junit:junit:$junit_version"
