@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.arctouch.codechallenge.scenes.splash.SplashActivity"
+            android:name=".scenes.splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.arctouch.codechallenge.scenes.home.HomeActivity" />
+        <activity android:name=".scenes.home.HomeActivity" />
 
     </application>
 
