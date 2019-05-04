@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 val apiModule = module {
     single {
-        createMoviesService(
+        createTmdbApi(
             createRetrofit(
                 createOkHttpClient(
                     createLoggerInterceptor(),
@@ -69,6 +69,6 @@ fun createRetrofit(okHttpClient: OkHttpClient): Retrofit {
         .build()
 }
 
-fun createMoviesService(retrofit: Retrofit): TmdbApi {
+fun createTmdbApi(retrofit: Retrofit): TmdbApi {
     return retrofit.create(TmdbApi::class.java)
 }
