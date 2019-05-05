@@ -1,4 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Code Challenge</string>
+    <string name="app_name">Movie2U</string>
     <string name="movie_and_genres">%s - %s</string>
+
+    <string name="content_description_poster_image">Image that shows the chosen poster movie</string>
+    <string name="content_description_backdrop_image">Image that shows the chosen backdrop movie</string>
+    <string name="genres">Genres:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="overview">Overview:</string>
+    <string name="not_informed">Not informed</string>
+    <string name="play_trailer">Play trailer</string>
+    <string name="user_score">User Score:</string>
+    <string name="default_error_message">Something wrong happened :/ Swipe down to try again!</string>
 </resources>

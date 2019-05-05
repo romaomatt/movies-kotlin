@@ -1,44 +1,52 @@
 package com.arctouch.codechallenge.scenes.home
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.model.Movie
-import com.arctouch.codechallenge.util.MovieImageUrlBuilder
+import com.arctouch.codechallenge.util.BaseViewHolder
+import com.arctouch.codechallenge.util.POSTER_URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.TransitionOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.movie_item.view.*
+import kotlinx.android.synthetic.main.item_movie.view.*
 
-class HomeAdapter(private val movies: ArrayList<Movie>) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(private val movies: ArrayList<Movie>) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        return BaseViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.item_movie,
+                parent,
+                false
+            )
+        )
+    }
 
-        private val movieImageUrlBuilder = MovieImageUrlBuilder()
+    override fun getItemCount() = movies.count()
 
-        fun bind(movie: Movie) {
-            itemView.titleTextView.text = movie.title
-            itemView.genresTextView.text = movie.genres?.joinToString(separator = ", ") { it.name }
-            itemView.releaseDateTextView.text = movie.releaseDate
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        val movie = movies[position]
 
-            Glide.with(itemView)
-                .load(movie.posterPath?.let { movieImageUrlBuilder.buildPosterUrl(it) })
-                .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
-                .into(itemView.posterImageView)
+        holder.itemView.apply {
+            Glide.with(this)
+                .load(movie.posterPath?.let { POSTER_URL + it })
+                .transition(DrawableTransitionOptions.withCrossFade(200))
+                .error(R.drawable.ic_image_placeholder)
+                .into(posterImageView)
+
+            setOnClickListener {
+                val direction = HomeFragmentDirections.showMovieDetailsAction(movie)
+                it.findNavController().navigate(direction)
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun getItemCount() = movies.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movies[position])
-
-    fun addNewMovies(newMovies: ArrayList<Movie>) {
+    fun swapMovies(newMovies: ArrayList<Movie>) {
         movies.apply {
             clear()
             addAll(newMovies)

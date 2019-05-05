@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie2U</string>
+    <string name="movie_and_genres">%s - %s</string>
+
+    <string name="content_description_poster_image">Imagem que mostra o poster do filme escolhido</string>
+    <string name="content_description_backdrop_image">Imagem que mostra o backdrop do filme escolhido</string>
+    <string name="genres">Genêros:</string>
+    <string name="release_date">Data de Lançamento:</string>
+    <string name="overview">Visão Geral:</string>
+    <string name="not_informed">Não informado</string>
+    <string name="play_trailer">Veja o trailer</string>
+    <string name="user_score">Nota do Usuário:</string>
+    <string name="default_error_message">Alguma coisa errada aconteceu :/ Deslize para recarregar!</string>
+</resources>

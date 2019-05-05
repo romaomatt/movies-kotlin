@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#424242</color>
-    <color name="colorPrimaryDark">#1B1B1B</color>
-    <color name="colorAccent">@color/colorPrimary</color>
+    <color name="colorPrimary">@color/seance</color>
+    <color name="colorPrimaryDark">@color/pigment_indigo</color>
+    <color name="colorAccent">@color/violet_red</color>
+
+    <color name="seance">#7B1FA2</color>
+    <color name="pigment_indigo">#4A0072</color>
+    <color name="violet_red">#FF4081</color>
+    <color name="lipstick">#c60055</color>
+    <color name="mine_shaft_alpha_100">#FF424242</color>
+    <color name="ripe_plum">#2f0048</color>
+    <color name="amethyst">#AE52D4</color>
 </resources>
