@@ -7,5 +7,6 @@ class MoviesRepository(private val api: TmdbApi) {
 
     fun getGenres() = api.genres()
     fun getUpcomingMovies(page: Long) = api.upcomingMovies(page, DEFAULT_REGION)
+    fun getMovies() = api.discoverMovies()
 
 }

@@ -13,6 +13,9 @@ interface TmdbApi {
     @GET("genre/movie/list")
     fun genres(): Observable<GenreResponse>
 
+    @GET("discover/movie")
+    fun discoverMovies(): Observable<UpcomingMoviesResponse>
+
     @GET("movie/upcoming")
     fun upcomingMovies(
         @Query("page") page: Long,

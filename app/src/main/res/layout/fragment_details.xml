@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/posterCV"
+        android:layout_width="156dp"
+        android:layout_height="238dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/posterIMG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_poster_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_image_placeholder" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/genresRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintTop_toTopOf="@id/posterCV"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_genre"
+        tools:orientation="horizontal" />
+
+    <View
+        android:id="@+id/ratingBackgroundView"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/shape_circle_pigment_indigo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintTop_toBottomOf="@id/genresRV" />
+
+    <ProgressBar
+        android:id="@+id/ratingPB"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressDrawable="@drawable/custom_rating_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@id/ratingBackgroundView"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackgroundView"
+        app:layout_constraintStart_toStartOf="@id/ratingBackgroundView"
+        app:layout_constraintTop_toTopOf="@id/ratingBackgroundView" />
+
+    <TextView
+        android:id="@+id/ratingTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@id/ratingPB"
+        app:layout_constraintEnd_toStartOf="@id/ratingPB"
+        app:layout_constraintStart_toEndOf="@id/ratingPB"
+        app:layout_constraintTop_toTopOf="@id/ratingPB" />
+
+    <TextView
+        android:id="@+id/releaseDateLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/release_date"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/posterCV"
+        app:layout_constraintTop_toBottomOf="@id/posterCV" />
+
+    <TextView
+        android:id="@+id/releaseDateTXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:gravity="start"
+        android:maxLines="1"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/releaseDateLabelTXT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/releaseDateLabelTXT"
+        tools:text="2019-05-16" />
+
+    <TextView
+        android:id="@+id/overviewLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/overview"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/releaseDateLabelTXT"
+        app:layout_constraintTop_toBottomOf="@id/releaseDateLabelTXT" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/backdropIMG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/overviewLabelTXT"
+        app:layout_constraintTop_toTopOf="@id/overviewLabelTXT">
+
+        <TextView
+            android:id="@+id/overviewTXT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textSize="14sp"
+            tools:text="Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races. " />
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/backdropIMG"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:alpha="0.3"
+        android:contentDescription="@string/content_description_backdrop_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

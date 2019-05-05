@@ -24,7 +24,7 @@ class HomeViewModel(private val repository: MoviesRepository) : ViewModel() {
             .flatMap { genreResponse -> Observable.just(genreResponse.genres) }
             .map { genres -> MoviesCache.cacheGenres(genres) }
 
-            .concatMap { repository.getUpcomingMovies(currentPage) }
+            .concatMap { repository.getMovies() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { upcomingMovies ->
