@@ -44,7 +44,7 @@ class DetailsFragment : Fragment() {
             ratingPB.progress = voteAverage.decimalToInt()
 
             genresRV.apply {
-                adapter = GenreAdapter(movie.genres?.map { it.name } ?: ArrayList())
+                adapter = DetailsGenreAdapter(movie.genres?.map { it.name } ?: ArrayList())
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             }
 

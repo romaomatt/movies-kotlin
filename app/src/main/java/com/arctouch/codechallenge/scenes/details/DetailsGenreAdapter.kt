@@ -7,7 +7,7 @@ import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.util.BaseViewHolder
 import kotlinx.android.synthetic.main.item_genre.view.*
 
-class GenreAdapter(private val genreList: List<String>) : RecyclerView.Adapter<BaseViewHolder>() {
+class DetailsGenreAdapter(private val genreList: List<String>) : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return BaseViewHolder(
