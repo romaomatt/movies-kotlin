@@ -10,6 +10,8 @@ import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.util.BaseViewHolder
 import com.arctouch.codechallenge.util.POSTER_URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.TransitionOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.item_movie.view.*
 
@@ -33,7 +35,8 @@ class HomeAdapter(private val movies: ArrayList<Movie>) : RecyclerView.Adapter<B
         holder.itemView.apply {
             Glide.with(this)
                 .load(movie.posterPath?.let { POSTER_URL + it })
-                .apply(RequestOptions().placeholder(R.drawable.ic_image_placeholder))
+                .transition(DrawableTransitionOptions.withCrossFade(200))
+                .error(R.drawable.ic_image_placeholder)
                 .into(posterImageView)
 
             setOnClickListener {

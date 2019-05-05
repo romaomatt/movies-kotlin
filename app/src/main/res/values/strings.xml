@@ -9,4 +9,7 @@
     <string name="release_date">Release Date:</string>
     <string name="overview">Overview:</string>
     <string name="not_informed">Not informed</string>
+    <string name="play_trailer">Play trailer</string>
+    <string name="user_score">User Score:</string>
+    <string name="default_error_message">Something wrong happened :/ Swipe down to try again!</string>
 </resources>

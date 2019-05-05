@@ -5,14 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/backdropIMG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:contentDescription="@string/content_description_backdrop_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_image_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/posterCV"
-        android:layout_width="156dp"
-        android:layout_height="238dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/firstGuideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,11 +39,19 @@
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.36" />
+
     <TextView
         android:id="@+id/ratingLabelTXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/user_score"
         android:textColor="@color/ripe_plum"
@@ -42,10 +63,10 @@
         android:id="@+id/ratingBackgroundView"
         android:layout_width="86dp"
         android:layout_height="86dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shape_circle_pigment_indigo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintEnd_toStartOf="@id/secondGuideline"
+        app:layout_constraintStart_toEndOf="@id/firstGuideline"
         app:layout_constraintTop_toBottomOf="@id/ratingLabelTXT" />
 
     <com.dinuscxj.progressbar.CircleProgressBar
@@ -83,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/genres"
         android:textColor="@color/ripe_plum"
@@ -96,11 +117,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintEnd_toStartOf="@id/secondGuideline"
+        app:layout_constraintStart_toEndOf="@id/firstGuideline"
         app:layout_constraintTop_toBottomOf="@id/genreLabelTXT"
         app:spanCount="2"
         tools:itemCount="10"
@@ -111,6 +132,7 @@
         android:id="@+id/trailerTXT"
         android:layout_width="140dp"
         android:layout_height="28dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/shape_rectangle_pigment_indigo_10dp"
         android:clickable="true"
         android:focusable="true"
@@ -120,10 +142,10 @@
         android:paddingEnd="16dp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/posterCV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/posterCV" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackgroundView"
+        app:layout_constraintStart_toStartOf="@id/ratingBackgroundView"
+        app:layout_constraintTop_toBottomOf="@id/genresRV" />
 
     <ProgressBar
         android:id="@+id/trailerPB"
@@ -134,17 +156,24 @@
         app:layout_constraintStart_toStartOf="@id/trailerTXT"
         app:layout_constraintTop_toTopOf="@id/trailerTXT" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.64" />
+
     <TextView
         android:id="@+id/releaseDateLabelTXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
+        android:layout_marginEnd="80dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/release_date"
         android:textColor="@color/ripe_plum"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/posterCV"
-        app:layout_constraintTop_toBottomOf="@id/posterCV" />
+        app:layout_constraintStart_toEndOf="@id/secondGuideline"
+        app:layout_constraintTop_toTopOf="@id/ratingLabelTXT" />
 
     <TextView
         android:id="@+id/releaseDateTXT"
@@ -157,7 +186,7 @@
         android:gravity="start"
         android:maxLines="1"
         android:textColor="@color/ripe_plum"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBaseline_toBaselineOf="@id/releaseDateLabelTXT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/releaseDateLabelTXT"
@@ -167,7 +196,7 @@
         android:id="@+id/overviewLabelTXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/overview"
         android:textColor="@color/ripe_plum"
@@ -175,36 +204,17 @@
         app:layout_constraintStart_toStartOf="@id/releaseDateLabelTXT"
         app:layout_constraintTop_toBottomOf="@id/releaseDateLabelTXT" />
 
-    <ScrollView
+    <TextView
+        android:id="@+id/overviewTXT"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="6dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@id/backdropIMG"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="@color/ripe_plum"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/overviewLabelTXT"
-        app:layout_constraintTop_toTopOf="@id/overviewLabelTXT">
-
-        <TextView
-            android:id="@+id/overviewTXT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/ripe_plum"
-            android:textSize="14sp"
-            tools:text="Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races. " />
-
-    </ScrollView>
-
-    <ImageView
-        android:id="@+id/backdropIMG"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:alpha="0.3"
-        android:contentDescription="@string/content_description_backdrop_image"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_image_placeholder"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/overviewLabelTXT"
+        app:layout_constraintTop_toBottomOf="@id/overviewLabelTXT"
+        tools:text="Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races. " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

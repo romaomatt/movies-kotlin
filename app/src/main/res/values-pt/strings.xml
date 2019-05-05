@@ -9,4 +9,7 @@
     <string name="release_date">Data de Lançamento:</string>
     <string name="overview">Visão Geral:</string>
     <string name="not_informed">Não informado</string>
+    <string name="play_trailer">Veja o trailer</string>
+    <string name="user_score">Nota do Usuário:</string>
+    <string name="default_error_message">Alguma coisa errada aconteceu :/ Deslize para recarregar!</string>
 </resources>

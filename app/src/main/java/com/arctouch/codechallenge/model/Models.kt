@@ -7,6 +7,10 @@ data class GenreResponse(val genres: List<Genre>)
 
 data class Genre(val id: Int, val name: String) : Serializable
 
+data class TrailerResponse(val id: Int, val results: List<Trailer>)
+
+data class Trailer(val id: String, val key: String, val site: String)
+
 data class UpcomingMoviesResponse(
     val page: Int,
     val results: List<Movie>,

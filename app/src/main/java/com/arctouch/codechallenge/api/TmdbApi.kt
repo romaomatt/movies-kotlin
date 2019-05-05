@@ -2,6 +2,7 @@ package com.arctouch.codechallenge.api
 
 import com.arctouch.codechallenge.model.GenreResponse
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.model.TrailerResponse
 import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -15,6 +16,11 @@ interface TmdbApi {
 
     @GET("discover/movie")
     fun discoverMovies(): Observable<UpcomingMoviesResponse>
+
+    @GET("movie/{movie_id}/videos")
+    fun getTrailer(
+        @Path("movie_id") movieId: Int
+    ): Observable<TrailerResponse>
 
     @GET("movie/upcoming")
     fun upcomingMovies(
