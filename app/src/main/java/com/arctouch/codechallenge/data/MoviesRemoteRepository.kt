@@ -1,0 +1,15 @@
+package com.arctouch.codechallenge.data
+
+import com.arctouch.codechallenge.api.TmdbApi
+
+class MoviesRemoteRepository(private val api: TmdbApi) {
+
+    fun getGenres() = api.genres()
+
+    fun getTrailer(movieId: Int) = api.getTrailer(movieId)
+
+    fun getUpcomingMovies(page: Int) = api.upcomingMovies(page)
+
+    fun searchMovie(query: String) = api.searchMovie(query)
+
+}

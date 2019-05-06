@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backdropIMG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.1"
+        android:contentDescription="@string/content_description_backdrop_image"
+        android:src="@drawable/ic_image_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/posterCV"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="@dimen/spacing_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/firstGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/posterIMG"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/content_description_poster_image"
+            android:src="@drawable/ic_image_placeholder" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.36" />
+
+    <TextView
+        android:id="@+id/ratingLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_fine"
+        android:text="@string/user_score"
+        android:theme="@style/AppTheme.TextViewLabelRipe"
+        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintTop_toTopOf="@id/posterCV" />
+
+    <View
+        android:id="@+id/ratingBackgroundView"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@drawable/shape_circle_pigment_indigo"
+        app:layout_constraintEnd_toStartOf="@id/secondGuideline"
+        app:layout_constraintStart_toEndOf="@id/firstGuideline"
+        app:layout_constraintTop_toBottomOf="@id/ratingLabelTXT" />
+
+    <com.dinuscxj.progressbar.CircleProgressBar
+        android:id="@+id/ratingPB"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="@id/ratingBackgroundView"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackgroundView"
+        app:layout_constraintStart_toStartOf="@id/ratingBackgroundView"
+        app:layout_constraintTop_toTopOf="@id/ratingBackgroundView"
+        app:progress_background_color="@color/lipstick"
+        app:progress_end_color="@color/violet_red"
+        app:progress_start_color="@color/violet_red"
+        app:progress_stroke_cap="round"
+        app:progress_stroke_width="10dp"
+        app:progress_text_color="@android:color/transparent"
+        app:style="solid_line" />
+
+    <TextView
+        android:id="@+id/ratingTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/t0"
+        app:layout_constraintBottom_toBottomOf="@id/ratingPB"
+        app:layout_constraintEnd_toStartOf="@id/ratingPB"
+        app:layout_constraintStart_toEndOf="@id/ratingPB"
+        app:layout_constraintTop_toTopOf="@id/ratingPB"
+        tools:text="8.9" />
+
+    <TextView
+        android:id="@+id/genreLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:text="@string/genres"
+        android:theme="@style/AppTheme.TextViewLabelRipe"
+        app:layout_constraintStart_toEndOf="@id/posterCV"
+        app:layout_constraintTop_toBottomOf="@id/ratingBackgroundView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/genresRV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_fine"
+        android:layout_marginEnd="@dimen/spacing_small"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toStartOf="@id/secondGuideline"
+        app:layout_constraintStart_toEndOf="@id/firstGuideline"
+        app:layout_constraintTop_toBottomOf="@id/genreLabelTXT"
+        app:spanCount="2"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_genre"
+        tools:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/trailerTXT"
+        android:layout_width="140dp"
+        android:layout_height="@dimen/button_height_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@drawable/shape_rectangle_pigment_indigo_10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/t4"
+        app:layout_constraintEnd_toEndOf="@id/ratingBackgroundView"
+        app:layout_constraintStart_toStartOf="@id/ratingBackgroundView"
+        app:layout_constraintTop_toBottomOf="@id/genresRV" />
+
+    <ProgressBar
+        android:id="@+id/trailerPB"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/trailerTXT"
+        app:layout_constraintEnd_toEndOf="@id/trailerTXT"
+        app:layout_constraintStart_toStartOf="@id/trailerTXT"
+        app:layout_constraintTop_toTopOf="@id/trailerTXT" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.64" />
+
+    <TextView
+        android:id="@+id/releaseDateLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="80dp"
+        android:text="@string/release_date"
+        android:theme="@style/AppTheme.TextViewLabelRipe"
+        app:layout_constraintStart_toEndOf="@id/secondGuideline"
+        app:layout_constraintTop_toTopOf="@id/ratingLabelTXT" />
+
+    <TextView
+        android:id="@+id/releaseDateTXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_tiny"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
+        android:theme="@style/AppTheme.TextViewValueRipe"
+        app:layout_constraintBaseline_toBaselineOf="@id/releaseDateLabelTXT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/releaseDateLabelTXT"
+        tools:text="2019-05-16" />
+
+    <TextView
+        android:id="@+id/overviewLabelTXT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_fine"
+        android:text="@string/overview"
+        android:theme="@style/AppTheme.TextViewLabelRipe"
+        app:layout_constraintStart_toStartOf="@id/releaseDateLabelTXT"
+        app:layout_constraintTop_toBottomOf="@id/releaseDateLabelTXT" />
+
+    <TextView
+        android:id="@+id/overviewTXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:theme="@style/AppTheme.TextViewValueRipe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/overviewLabelTXT"
+        app:layout_constraintTop_toBottomOf="@id/overviewLabelTXT"
+        tools:text="Carol Danvers becomes one of the universe's most powerful heroes when Earth is caught in the middle of a galactic war between two alien races. " />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
