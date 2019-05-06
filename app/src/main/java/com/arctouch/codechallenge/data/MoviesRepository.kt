@@ -10,4 +10,6 @@ class MoviesRepository(private val api: TmdbApi) {
 
     fun getUpcomingMovies(page: Int) = api.upcomingMovies(page)
 
+    fun searchMovie(query: String) = api.searchMovie(query)
+
 }

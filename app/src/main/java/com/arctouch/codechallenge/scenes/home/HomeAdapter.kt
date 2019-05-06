@@ -1,5 +1,6 @@
 package com.arctouch.codechallenge.scenes.home
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -14,7 +15,11 @@ import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.util.BaseViewHolder
 import com.arctouch.codechallenge.util.POSTER_URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.android.synthetic.main.item_movie_footer.view.*
 
@@ -59,11 +64,25 @@ class HomeAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPA
                         .load(movie.posterPath?.let { POSTER_URL + it })
                         .centerCrop()
                         .transition(DrawableTransitionOptions.withCrossFade(200))
+                        .listener(object: RequestListener<Drawable?> {
+                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable?>?, isFirstResource: Boolean): Boolean {
+                                movieNameTXT.apply {
+                                    visible()
+                                    text = movie.title
+                                }
+                                return false
+                            }
+
+                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable?>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                movieNameTXT.gone()
+                                return false
+                            }
+                        })
                         .error(R.drawable.ic_image_placeholder)
                         .into(posterImageView)
 
                     setOnClickListener {
-                        val direction = HomeFragmentDirections.showMovieDetailsAction(movie)
+                        val direction = HomeFragmentDirections.showMovieDetailsFromHome(movie)
                         it.findNavController().navigate(direction)
                     }
                 }

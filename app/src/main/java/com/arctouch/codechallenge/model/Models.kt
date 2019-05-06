@@ -11,7 +11,7 @@ data class TrailerResponse(val id: Int, val results: List<Trailer>)
 
 data class Trailer(val id: String, val key: String, val site: String)
 
-data class UpcomingMoviesResponse(
+data class MovieResponse(
     val page: Int,
     val results: List<Movie>,
     @Json(name = "total_pages") val totalPages: Int,

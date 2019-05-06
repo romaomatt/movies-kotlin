@@ -3,6 +3,7 @@
     <string name="app_name">Movie2U</string>
     <string name="movie_and_genres">%s - %s</string>
     <string name="empty_space">\u0020</string>
+    <string name="search_view">searchView</string>
 
     <string name="content_description_poster_image">Image that shows the chosen poster movie</string>
     <string name="content_description_backdrop_image">Image that shows the chosen backdrop movie</string>
@@ -12,5 +13,7 @@
     <string name="not_informed">Not informed.</string>
     <string name="play_trailer">Play trailer</string>
     <string name="user_score">User Score:</string>
-    <string name="default_error_message">Something wrong happened :/ Swipe down to try again!</string>
+    <string name="default_error_message">Something wrong happened :/ Tap here to try again!</string>
+    <string name="search">Search</string>
+    <string name="error_message_search_error">We didn\'t find any results for your search :/</string>
 </resources>
