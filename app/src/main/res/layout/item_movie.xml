@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:contentDescription="@string/content_description_poster_image"
-            android:scaleType="centerCrop"
             android:src="@drawable/ic_image_placeholder"
             app:layout_constraintDimensionRatio="H,1:1.6"
             app:layout_constraintTop_toTopOf="parent" />

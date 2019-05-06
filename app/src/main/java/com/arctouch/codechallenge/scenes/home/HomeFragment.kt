@@ -14,6 +14,7 @@ import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.core.dpToPx
 import com.arctouch.codechallenge.core.gone
 import com.arctouch.codechallenge.core.visible
+import com.arctouch.codechallenge.data.MovieListStateEnum
 import com.arctouch.codechallenge.util.MOVIES_COLUMN_NUMBER
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+    private val homeAdapter: HomeAdapter by lazy { HomeAdapter() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -28,21 +30,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         configLayout()
         configObservers()
     }
 
     private fun configLayout() {
-        homeSRL.apply {
-            setColorSchemeResources(R.color.colorAccent)
-            setOnRefreshListener {
-                homeViewModel.handleMovieList(true)
-            }
-        }
-
         homeRV.apply {
-            adapter = HomeAdapter(ArrayList())
+            adapter = homeAdapter
             layoutManager = GridLayoutManager(context, MOVIES_COLUMN_NUMBER)
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -65,22 +59,27 @@ class HomeFragment : Fragment() {
 
     private fun configObservers() {
         homeViewModel.apply {
-            loadingMovies.observe(viewLifecycleOwner, Observer { isLoading ->
-                isLoading?.let {
-                    with(homePB) { if (it) visible() else gone() }
-                    with(homeSRL) { if (isRefreshing) isRefreshing = false }
-                }
-            })
-
             moviesList.observe(viewLifecycleOwner, Observer { movieList ->
                 movieList?.let {
-                    (homeRV.adapter as? HomeAdapter)?.swapMovies(it)
+                    homeAdapter.submitList(it)
                 }
             })
 
-            foundError.observe(viewLifecycleOwner, Observer { foundError ->
-                foundError?.let {
-                    if (it) Toast.makeText(context, getString(R.string.default_error_message), Toast.LENGTH_SHORT).show()
+            currentState.observe(viewLifecycleOwner, Observer { state ->
+                state?.let {
+                    with(homePB) {
+                        if (it == MovieListStateEnum.LOADING_ADAPTER && homeAdapter.itemCount == 0) {
+                            visible()
+                        } else {
+                            gone()
+                        }
+                    }
+
+                    if (it == MovieListStateEnum.ERROR) {
+                        Toast.makeText(context, getString(R.string.default_error_message), Toast.LENGTH_SHORT).show()
+                    }
+
+                    homeAdapter.updateState(state)
                 }
             })
         }

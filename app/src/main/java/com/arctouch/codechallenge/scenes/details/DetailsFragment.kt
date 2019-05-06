@@ -14,12 +14,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.core.decimalToInt
+import com.arctouch.codechallenge.core.formatDateFromTmdb
 import com.arctouch.codechallenge.core.gone
 import com.arctouch.codechallenge.core.visible
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.util.BACKDROP_URL
 import com.arctouch.codechallenge.util.POSTER_URL
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -54,24 +56,33 @@ class DetailsFragment : Fragment() {
         movie.apply {
             (activity as? AppCompatActivity)?.supportActionBar?.title = movie.title
 
-            releaseDateTXT.text = releaseDate ?: notInformed
-            overviewTXT.text = overview ?: notInformed
+            releaseDateTXT.text = releaseDate?.formatDateFromTmdb() ?: notInformed
+            overviewTXT.text = overview?.let { if (it.isBlank()) notInformed else it } ?: notInformed
             ratingTXT.text = voteAverage
             ratingPB.progress = voteAverage.decimalToInt()
 
             genresRV.apply {
                 adapter = DetailsGenreAdapter(movie.genres ?: ArrayList())
-                layoutManager = GridLayoutManager(context, 2, GridLayoutManager.HORIZONTAL, false)
+                layoutManager = GridLayoutManager(
+                    context,
+                    2,
+                    GridLayoutManager.HORIZONTAL,
+                    false
+                )
             }
+
+            val glideOptions = RequestOptions()
+                .centerCrop()
+                .error(R.drawable.ic_image_placeholder)
 
             Glide.with(this@DetailsFragment)
                 .load(posterPath?.let { POSTER_URL + it })
-                .placeholder(R.drawable.ic_image_placeholder)
+                .apply(glideOptions)
                 .into(posterIMG)
 
             Glide.with(this@DetailsFragment)
                 .load(backdropPath?.let { BACKDROP_URL + it })
-                .placeholder(R.drawable.ic_image_placeholder)
+                .apply(glideOptions)
                 .into(backdropIMG)
         }
     }
@@ -102,7 +113,7 @@ class DetailsFragment : Fragment() {
     private fun changeTrailerButton(isLoading: Boolean, foundError: Boolean) {
         when {
             isLoading -> displayTrailerButton("", false, R.drawable.shape_rectangle_pigment_indigo_10dp)
-            !isLoading && !foundError -> displayTrailerButton(getString(R.string.play_trailer), true, R.drawable.shape_rectangle_pigment_indigo_10dp)
+            !foundError -> displayTrailerButton(getString(R.string.play_trailer), true, R.drawable.shape_rectangle_pigment_indigo_10dp)
             foundError -> displayTrailerButton(getString(R.string.play_trailer), true, R.drawable.shape_rectangle_amethyst_10dp)
         }
     }

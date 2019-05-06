@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.arctouch.codechallenge.data.MoviesRepository
-import com.arctouch.codechallenge.model.Trailer
 import com.arctouch.codechallenge.util.YOUTUBE_URL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -34,7 +33,7 @@ class DetailsViewModel(repository: MoviesRepository, movieId: Int) : ViewModel()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onNext = { trailerResponse ->
+                onSuccess = { trailerResponse ->
                     val trailer = trailerResponse.results.firstOrNull { it.site == "YouTube" }
 
                     _loadingTrailer.postValue(false)
