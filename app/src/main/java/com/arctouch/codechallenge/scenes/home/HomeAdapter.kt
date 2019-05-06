@@ -40,7 +40,7 @@ class HomeAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPA
         }
     }
 
-    private var currentState = MovieListStateEnum.LOADING_ADAPTER
+    private var currentState = MovieListStateEnum.LOADING
 
     override fun getItemViewType(position: Int): Int {
         return if (position < super.getItemCount()) MOVIES_TYPE else FOOTER_TYPE
@@ -89,7 +89,7 @@ class HomeAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPA
             }
         } else {
             holder.itemView.apply {
-                with(footerPB) { if (currentState == MovieListStateEnum.LOADING_ADAPTER) visible() else gone() }
+                with(footerPB) { if (currentState == MovieListStateEnum.LOADING) visible() else gone() }
                 with(footerErrorTXT) { if (currentState == MovieListStateEnum.ERROR) visible() else gone() }
             }
         }
@@ -98,7 +98,7 @@ class HomeAdapter : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPA
     override fun getItemCount() = super.getItemCount() + if (showingFooter()) 1 else 0
 
     private fun showingFooter(): Boolean {
-        return super.getItemCount() != 0 && (currentState == MovieListStateEnum.LOADING_ADAPTER || currentState == MovieListStateEnum.ERROR)
+        return super.getItemCount() != 0 && (currentState == MovieListStateEnum.LOADING || currentState == MovieListStateEnum.ERROR)
     }
 
     fun updateState(state: MovieListStateEnum) {

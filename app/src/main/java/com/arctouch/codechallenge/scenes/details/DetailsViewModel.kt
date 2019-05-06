@@ -3,14 +3,14 @@ package com.arctouch.codechallenge.scenes.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.arctouch.codechallenge.data.MoviesRepository
+import com.arctouch.codechallenge.data.MoviesRemoteRepository
 import com.arctouch.codechallenge.util.YOUTUBE_URL
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class DetailsViewModel(repository: MoviesRepository, movieId: Int) : ViewModel() {
+class DetailsViewModel(repository: MoviesRemoteRepository, movieId: Int) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     private val _trailerUrl = MutableLiveData<String>()

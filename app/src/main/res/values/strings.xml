@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Movie2U</string>
+    <string name="app_name">Movies2U</string>
     <string name="movie_and_genres">%s - %s</string>
     <string name="empty_space">\u0020</string>
     <string name="search_view">searchView</string>

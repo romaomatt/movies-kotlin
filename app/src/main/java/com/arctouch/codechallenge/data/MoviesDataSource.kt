@@ -13,7 +13,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class MoviesDataSource(
-    private val moviesRepository: MoviesRepository,
+    private val moviesRepository: MoviesRemoteRepository,
     private val compositeDisposable: CompositeDisposable
 ) : PageKeyedDataSource<Int, Movie>() {
 
@@ -23,7 +23,7 @@ class MoviesDataSource(
     val state: LiveData<MovieListStateEnum> = _state
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Movie>) {
-        _state.postValue(MovieListStateEnum.LOADING_ADAPTER)
+        _state.postValue(MovieListStateEnum.LOADING)
 
         val initialDisposable = moviesRepository.getGenres()
             .flatMap { genreResponse -> Observable.just(genreResponse.genres) }
@@ -46,7 +46,7 @@ class MoviesDataSource(
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        _state.postValue(MovieListStateEnum.LOADING_ADAPTER)
+        _state.postValue(MovieListStateEnum.LOADING)
 
         val nextDisposable = moviesRepository.getUpcomingMovies(params.key)
             .subscribeOn(Schedulers.io())

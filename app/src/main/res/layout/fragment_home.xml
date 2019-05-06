@@ -30,19 +30,17 @@
 
     <TextView
         android:id="@+id/homeErrorTXT"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="center"
-        android:padding="5dp"
         android:text="@string/default_error_message"
         android:textColor="@color/amethyst"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
