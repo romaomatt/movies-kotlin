@@ -6,4 +6,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.TextViewLabelRipe" parent="AppTheme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@color/ripe_plum</item>
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
+    <style name="AppTheme.TextViewValueRipe" parent="AppTheme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/ripe_plum</item>
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
+    <style name="AppTheme.TextViewLabelWhite" parent="AppTheme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/t3</item>
+    </style>
+
 </resources>

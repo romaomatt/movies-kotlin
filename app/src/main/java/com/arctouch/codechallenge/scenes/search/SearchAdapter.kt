@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.arctouch.codechallenge.R
 import com.arctouch.codechallenge.core.gone
+import com.arctouch.codechallenge.core.hideKeyboard
 import com.arctouch.codechallenge.core.visible
 import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.util.BaseViewHolder
@@ -59,6 +60,7 @@ class SearchAdapter(private val movieList: ArrayList<Movie>) : RecyclerView.Adap
                 .into(posterImageView)
 
             setOnClickListener {
+                it.hideKeyboard()
                 val direction = SearchFragmentDirections.showMovieDetailsFromSearch(movie)
                 it.findNavController().navigate(direction)
             }

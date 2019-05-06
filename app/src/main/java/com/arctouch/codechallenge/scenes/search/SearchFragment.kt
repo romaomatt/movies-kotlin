@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arctouch.codechallenge.R
@@ -32,6 +31,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as? MainActivity)?.invalidateOptionsMenu()
+
         configLayout()
         configQueryObserver()
         configObservers()
@@ -69,19 +70,21 @@ class SearchFragment : Fragment() {
             })
 
             movieState.observe(viewLifecycleOwner, Observer { state ->
-                when (state) {
-                    MovieListStateEnum.COMPLETE -> {
-                        searchErrorTXT.gone()
-                        searchPB.gone()
-                    }
-                    MovieListStateEnum.LOADING_ADAPTER -> {
-                        searchAdapter.swapMovies(ArrayList())
-                        searchPB.visible()
-                        searchErrorTXT.gone()
-                    }
-                    MovieListStateEnum.ERROR -> {
-                        searchPB.gone()
-                        searchErrorTXT.visible()
+                state?.let {
+                    when (state) {
+                        MovieListStateEnum.COMPLETE -> {
+                            searchErrorTXT.gone()
+                            searchPB.gone()
+                        }
+                        MovieListStateEnum.LOADING -> {
+                            searchAdapter.swapMovies(ArrayList())
+                            searchPB.visible()
+                            searchErrorTXT.gone()
+                        }
+                        MovieListStateEnum.ERROR -> {
+                            searchPB.gone()
+                            searchErrorTXT.visible()
+                        }
                     }
                 }
             })

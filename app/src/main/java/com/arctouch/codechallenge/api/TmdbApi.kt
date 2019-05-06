@@ -11,13 +11,13 @@ import retrofit2.http.Query
 
 interface TmdbApi {
 
-    @GET("genre/movie/list")
-    fun genres(): Observable<GenreResponse>
-
     @GET("movie/{movie_id}/videos")
     fun getTrailer(
         @Path("movie_id") movieId: Int
     ): Single<TrailerResponse>
+
+    @GET("genre/movie/list")
+    fun genres(): Observable<GenreResponse>
 
     @GET("movie/upcoming")
     fun upcomingMovies(
