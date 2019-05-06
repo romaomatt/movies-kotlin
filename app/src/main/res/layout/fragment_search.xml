@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRV"
+        android:id="@+id/searchRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -18,7 +18,7 @@
         tools:listitem="@layout/item_movie" />
 
     <ProgressBar
-        android:id="@+id/homePB"
+        android:id="@+id/searchPB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -29,20 +29,19 @@
         tools:visibility="gone" />
 
     <TextView
-        android:id="@+id/homeErrorTXT"
-        android:layout_width="220dp"
+        android:id="@+id/searchErrorTXT"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:fontFamily="@font/roboto_regular"
         android:gravity="center"
-        android:padding="5dp"
-        android:text="@string/default_error_message"
+        android:text="@string/error_message_search_error"
         android:textColor="@color/amethyst"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

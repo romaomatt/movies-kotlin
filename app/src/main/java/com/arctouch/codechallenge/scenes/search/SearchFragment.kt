@@ -1,14 +1,13 @@
-package com.arctouch.codechallenge.scenes.home
+package com.arctouch.codechallenge.scenes.search
 
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arctouch.codechallenge.R
@@ -19,29 +18,28 @@ import com.arctouch.codechallenge.core.visible
 import com.arctouch.codechallenge.data.MovieListStateEnum
 import com.arctouch.codechallenge.scenes.main.MainActivity
 import com.arctouch.codechallenge.util.MOVIES_COLUMN_NUMBER
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private val homeViewModel: HomeViewModel by viewModel()
-    private val homeAdapter: HomeAdapter by lazy { HomeAdapter() }
+    private val searchViewModel: SearchViewModel by viewModel()
+    private val searchAdapter by lazy { SearchAdapter(ArrayList()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as? MainActivity)?.invalidateOptionsMenu()
-
         configLayout()
+        configQueryObserver()
         configObservers()
     }
 
     private fun configLayout() {
-        homeRV.apply {
-            adapter = homeAdapter
+        searchRV.apply {
+            adapter = searchAdapter
             layoutManager = GridLayoutManager(context, MOVIES_COLUMN_NUMBER)
             addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
@@ -56,36 +54,35 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun configQueryObserver() {
+        (activity as? MainActivity)?.queryText?.observe(viewLifecycleOwner, Observer {
+            searchViewModel.searchMovie(it)
+        })
+    }
+
     private fun configObservers() {
-        homeViewModel.apply {
-            moviesList.observe(viewLifecycleOwner, Observer { movieList ->
+        searchViewModel.apply {
+            movieList.observe(viewLifecycleOwner, Observer { movieList ->
                 movieList?.let {
-                    homeAdapter.submitList(it)
+                    (searchRV.adapter as? SearchAdapter)?.swapMovies(it)
                 }
             })
 
-            currentState.observe(viewLifecycleOwner, Observer { state ->
-                state?.let {
-                    with(homePB) {
-                        if (it == MovieListStateEnum.LOADING_ADAPTER && homeAdapter.itemCount == 0) {
-                            visible()
-                        } else {
-                            gone()
-                        }
+            movieState.observe(viewLifecycleOwner, Observer { state ->
+                when (state) {
+                    MovieListStateEnum.COMPLETE -> {
+                        searchErrorTXT.gone()
+                        searchPB.gone()
                     }
-
-                    if (it == MovieListStateEnum.ERROR && homeAdapter.itemCount == 0) {
-                        homeErrorTXT.apply {
-                            visible()
-                            setOnClickListener {
-                                handleRetry()
-                            }
-                        }
-                    } else {
-                        homeErrorTXT.gone()
+                    MovieListStateEnum.LOADING_ADAPTER -> {
+                        searchAdapter.swapMovies(ArrayList())
+                        searchPB.visible()
+                        searchErrorTXT.gone()
                     }
-
-                    homeAdapter.updateState(state)
+                    MovieListStateEnum.ERROR -> {
+                        searchPB.gone()
+                        searchErrorTXT.visible()
+                    }
                 }
             })
         }

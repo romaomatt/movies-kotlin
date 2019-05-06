@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.arctouch.codechallenge.R
@@ -18,6 +19,7 @@ import com.arctouch.codechallenge.core.formatDateFromTmdb
 import com.arctouch.codechallenge.core.gone
 import com.arctouch.codechallenge.core.visible
 import com.arctouch.codechallenge.model.Movie
+import com.arctouch.codechallenge.scenes.main.MainActivity
 import com.arctouch.codechallenge.util.BACKDROP_URL
 import com.arctouch.codechallenge.util.POSTER_URL
 import com.bumptech.glide.Glide
@@ -54,10 +56,14 @@ class DetailsFragment : Fragment() {
         val notInformed = getString(R.string.not_informed)
 
         movie.apply {
-            (activity as? AppCompatActivity)?.supportActionBar?.title = movie.title
+            (activity as? MainActivity)?.apply {
+                invalidateOptionsMenu()
+                supportActionBar?.title = movie.title
+            }
 
             releaseDateTXT.text = releaseDate?.formatDateFromTmdb() ?: notInformed
-            overviewTXT.text = overview?.let { if (it.isBlank()) notInformed else it } ?: notInformed
+            overviewTXT.text = overview?.let { if (it.isBlank()) notInformed else it }
+                ?: notInformed
             ratingTXT.text = voteAverage
             ratingPB.progress = voteAverage.decimalToInt()
 

@@ -1,6 +1,7 @@
 package com.arctouch.codechallenge.core
 
 import android.content.res.Resources
+import android.graphics.Rect
 import android.view.View
 import java.util.*
 
@@ -36,4 +37,11 @@ fun String.formatDateFromTmdb(): String {
     } else {
         ""
     }
+}
+
+fun Rect.configureGridMargins(isItemOnLeft: Boolean, marginMax: Int, marginMin: Int) {
+    left = if (isItemOnLeft) marginMax else marginMin
+    right = if (isItemOnLeft) marginMin else marginMax
+    top = marginMin
+    bottom = marginMin
 }
