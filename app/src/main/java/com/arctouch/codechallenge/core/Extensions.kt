@@ -2,6 +2,7 @@ package com.arctouch.codechallenge.core
 
 import android.content.res.Resources
 import android.view.View
+import java.util.*
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -17,5 +18,22 @@ fun Int.dpToPx(resources: Resources): Int {
 }
 
 fun String.decimalToInt(): Int {
-    return replace(".", "").toInt()
+    return if (length == 1) {
+        this.toInt() * 10
+    } else {
+        this.replace(".", "").toInt()
+    }
+}
+
+fun String.formatDateFromTmdb(): String {
+    return if (length == 10) {
+        if (Locale.getDefault().country == "BR") {
+            val dateList = this.split("-")
+            dateList.reversed().joinToString("/")
+        } else {
+            this.replace("-", "/")
+        }
+    } else {
+        ""
+    }
 }

@@ -23,6 +23,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.arctouch.codechallenge.scenes.details.DetailsFragment"
+        android:label="@string/empty_space"
         tools:layout="@layout/fragment_details">
 
         <argument

@@ -5,6 +5,7 @@ import com.arctouch.codechallenge.model.Movie
 import com.arctouch.codechallenge.model.TrailerResponse
 import com.arctouch.codechallenge.model.UpcomingMoviesResponse
 import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -14,23 +15,19 @@ interface TmdbApi {
     @GET("genre/movie/list")
     fun genres(): Observable<GenreResponse>
 
-    @GET("discover/movie")
-    fun discoverMovies(): Observable<UpcomingMoviesResponse>
-
     @GET("movie/{movie_id}/videos")
     fun getTrailer(
         @Path("movie_id") movieId: Int
-    ): Observable<TrailerResponse>
+    ): Single<TrailerResponse>
 
     @GET("movie/upcoming")
     fun upcomingMovies(
-        @Query("page") page: Long,
-        @Query("region") region: String
+        @Query("page") page: Int
     ): Observable<UpcomingMoviesResponse>
 
     @GET("movie/{id}")
     fun movie(
         @Path("id") id: Long
-    ): Observable<Movie>
+    ): Single<Movie>
 
 }
