@@ -18,7 +18,7 @@ ext {
     retrofit_moshi_version = '2.3.0'
     retrofit_rxjava_version = '2.3.0'
     logging_interceptor_version = '3.9.0'
-    rxjava_version = '2.0.2'
+    rxandroid_version = '2.1.0'
     rxkotlin_version = '2.3.0'
     glide_version = '4.9.0'
     koin_version = '2.0.0-rc-2'
